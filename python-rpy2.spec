@@ -10,11 +10,9 @@ Source0:	http://dl.sourceforge.net/rpy/%{module}-%{version}.tar.gz
 URL:		http://rpy.sourceforge.net/
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
-# if py_postclean is used
 BuildRequires:	rpmbuild(macros) >= 1.219
-#%pyrequires_eq	python-libs
+Requires:	R
 %pyrequires_eq	python-modules
-#BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
