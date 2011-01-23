@@ -9,6 +9,8 @@ Source0:	http://downloads.sourceforge.net/rpy/%{module}-%{version}.tar.gz
 # Source0-md5:	378c053f5eac7e96c500c8ebcac00a42
 URL:		http://rpy.sourceforge.net/
 BuildRequires:	R
+BuildRequires:	blas-devel
+BuildRequires:	lapack-devel
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
