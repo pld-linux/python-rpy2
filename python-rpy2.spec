@@ -1,12 +1,13 @@
 %define module rpy2
 Summary:	Simple and robust Python interface to the R Programming Language
 Name:		python-%{module}
-Version:	2.1.8
+Version:	2.2.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	http://downloads.sourceforge.net/rpy/%{module}-%{version}.tar.gz
-# Source0-md5:	378c053f5eac7e96c500c8ebcac00a42
+Source1:	MANIFEST.in
+# Source0-md5:	a42a7f1e6ddb10dc3a1886c2f4309fab
 URL:		http://rpy.sourceforge.net/
 BuildRequires:	R
 BuildRequires:	blas-devel
@@ -25,16 +26,39 @@ execute arbitrary R functions (including the graphic functions). All
 errors from the R language are converted to Python exceptions. Any
 module installed for the R system can be used from within Python.
 
+%package -n python3-%{module}
+Summary:	Simple and robust Python interface to the R Programming Language
+Group:          Development/Languages/Python
+%pyrequires_eq	python3-modules
+
+%description -n python3-%{module}
+RPy is a very simple, yet robust, Python interface to the R
+Programming Language. It can manage all kinds of R objects and can
+execute arbitrary R functions (including the graphic functions). All
+errors from the R language are converted to Python exceptions. Any
+module installed for the R system can be used from within Python.
+
 %prep
 %setup -q -n %{module}-%{version}
 
 %build
 export CFLAGS="%{rpmcflags}"
-%{__python} setup.py build
+%{__python} setup.py build --build-base py2
+
+cp %{SOURCE1} $RPM_BUILD_DIR/%{module}-%{version}
+%{__python3} setup.py build --build-base py3
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install \
+%{__python} setup.py build \
+	--build-base py2 \
+	install \
+	--optimize=2 \
+	--root=$RPM_BUILD_ROOT
+
+%{__python3} setup.py build \
+	--build-base py3 \
+	install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
@@ -55,7 +79,27 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/%{module}/rlike
 %{py_sitedir}/%{module}/robjects
 
+%{py_sitedir}/%{module}/interactive
+
 %dir %{py_sitedir}/%{module}/rinterface
 %attr(755,root,root) %{py_sitedir}/%{module}/rinterface/*.so
 %{py_sitedir}/%{module}/rinterface/*.py[co]
 %{py_sitedir}/%{module}/rinterface/tests
+
+%files -n python3-%{module}
+%defattr(644,root,root,755)
+%doc AUTHORS NEWS README
+%dir %{py3_sitedir}/%{module}
+%{py3_sitedir}/*.egg-info
+
+%{py3_sitedir}/%{module}/*.py
+%{py3_sitedir}/%{module}/__pycache__
+%{py3_sitedir}/%{module}/interactive
+%{py3_sitedir}/%{module}/rlike
+%{py3_sitedir}/%{module}/robjects
+
+%dir %{py_sitedir}/%{module}/rinterface
+%attr(755,root,root) %{py3_sitedir}/%{module}/rinterface/*.so
+%{py3_sitedir}/%{module}/rinterface/*.py
+%{py3_sitedir}/%{module}/rinterface/__pycache__
+%{py3_sitedir}/%{module}/rinterface/tests
