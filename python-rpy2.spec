@@ -1,14 +1,13 @@
 %define module rpy2
 Summary:	Simple and robust Python interface to the R Programming Language
 Name:		python-%{module}
-Version:	2.2.0
+Version:	2.2.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
-Source0:	http://downloads.sourceforge.net/rpy/%{module}-%{version}.tar.gz
-Source1:	MANIFEST.in
-# Source0-md5:	a42a7f1e6ddb10dc3a1886c2f4309fab
-URL:		http://rpy.sourceforge.net/
+Source0:	http://pypi.python.org/packages/source/r/rpy2/%{module}-%{version}.tar.gz
+# Source0-md5:	422a31a1b3cf36efafdae53306f7f422
+URL:		http://rpy.sourceforge.net/rpy2.html
 BuildRequires:	R
 BuildRequires:	blas-devel
 BuildRequires:	lapack-devel
@@ -44,8 +43,6 @@ module installed for the R system can be used from within Python.
 %build
 export CFLAGS="%{rpmcflags}"
 %{__python} setup.py build --build-base py2
-
-cp %{SOURCE1} $RPM_BUILD_DIR/%{module}-%{version}
 %{__python3} setup.py build --build-base py3
 
 %install
