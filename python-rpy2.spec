@@ -12,6 +12,7 @@ BuildRequires:	R
 BuildRequires:	blas-devel
 BuildRequires:	lapack-devel
 BuildRequires:	python-devel
+BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	R
