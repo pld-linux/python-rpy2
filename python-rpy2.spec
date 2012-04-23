@@ -1,12 +1,12 @@
 %define module rpy2
 Summary:	Simple and robust Python interface to the R Programming Language
 Name:		python-%{module}
-Version:	2.2.5
+Version:	2.2.6
 Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/r/rpy2/%{module}-%{version}.tar.gz
-# Source0-md5:	aa9c0c3120716705b28127323cc4ac6d
+# Source0-md5:	32d73a3e4acb915ce15d958c9092dcb8
 URL:		http://rpy.sourceforge.net/rpy2.html
 BuildRequires:	R
 BuildRequires:	blas-devel
