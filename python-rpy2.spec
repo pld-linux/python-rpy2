@@ -2,7 +2,7 @@
 Summary:	Simple and robust Python interface to the R Programming Language
 Name:		python-%{module}
 Version:	2.2.6
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/r/rpy2/%{module}-%{version}.tar.gz
@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/%{module}/rlike
 %{py3_sitedir}/%{module}/robjects
 
-%dir %{py_sitedir}/%{module}/rinterface
+%dir %{py3_sitedir}/%{module}/rinterface
 %attr(755,root,root) %{py3_sitedir}/%{module}/rinterface/*.so
 %{py3_sitedir}/%{module}/rinterface/*.py
 %{py3_sitedir}/%{module}/rinterface/__pycache__
