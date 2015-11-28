@@ -42,19 +42,18 @@ module installed for the R system can be used from within Python.
 %setup -q -n %{module}-%{version}
 
 %build
-export CFLAGS="%{rpmcflags}"
-%{__python} setup.py build --build-base py2
-%{__python3} setup.py build --build-base py3
+%py_build --build-base py2
+%py3_build --build-base py3
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py build \
+%py_build \
 	--build-base py2 \
 	install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
-%{__python3} setup.py build \
+%py3_build \
 	--build-base py3 \
 	install \
 	--optimize=2 \
